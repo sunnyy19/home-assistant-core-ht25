@@ -120,14 +120,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 def process_before_send(
     hass: HomeAssistant,
-    options: Mapping[str, Any],
+    options: dict[str, Any],
     channel: str,
     huuid: str,
     system_info: dict[str, bool | str],
     custom_components: dict[str, Integration],
     event: dict[str, Any],
     hint: dict[str, Any],
-):
+) -> dict[str, Any] | None:
+    
     """Process a Sentry event before sending it to Sentry."""
     # Filter out handled events by default
     if (
